@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage  xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:LauraLine"             
+             xmlns:viewmodels="clr-namespace:LauraLine.ViewModels"
+             xmlns:views="clr-namespace:LauraLine.Views"             
+             BindingContext="{x:Static viewmodels:ViewModelLocator.mainPageVM}"
+             x:Class="LauraLine.MainPage"
+             Title="杨慕宜的流水账"
+             Appearing="ContentPage_Appearing"
+             Disappearing="ContentPage_Disappearing">
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Name="btnSync" Order="Primary" Text="同步" Priority="1"
+                     Clicked="BtnSync_Clicked"/>
+    </TabbedPage.ToolbarItems>
+    <ContentPage Title="当前">
+        <Grid>
+            <Grid IsVisible="{Binding ShowContent}">
+                <ListView ItemsSource="{Binding LineItems}" HasUnevenRows="True"
+                      SeparatorVisibility="None" SelectionMode="None" Margin="0,40,0,0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <FlexLayout JustifyContent="SpaceBetween" Margin="2"
+                                        BackgroundColor="{Binding BackgroundColor}">
+                                    <FlexLayout.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                          Command="{Binding ViewDetailsCommand}" />
+                                    </FlexLayout.GestureRecognizers>
+                                    <Label Text="{Binding ItemName}" StyleClass="header"/>
+                                    <Label Text="{Binding ItemTime}"/>
+                                    <Image Source="ic_expand_more" WidthRequest="48" HeightRequest="48" />
+                                </FlexLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button Text="+" HorizontalOptions="End" VerticalOptions="End"
+                Style="{StaticResource fabButton}"
+                Command="{Binding AddLineActionCommand}"></Button>
+            </Grid>
+            <views:LoadingView HorizontalOptions="Fill" VerticalOptions="Fill"/>
+        </Grid>
+    </ContentPage>
+    <ContentPage Title="历史">
+        <Grid>
+            <Grid IsVisible="{Binding ShowContent}">
+                <ListView ItemsSource="{Binding OldLineItems}" HasUnevenRows="True"
+                      SeparatorVisibility="None" SelectionMode="None" Margin="0,40,0,0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <FlexLayout JustifyContent="SpaceBetween" Margin="2"
+                                        BackgroundColor="{Binding BackgroundColor}">
+                                    <FlexLayout.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                          Command="{Binding ViewDetailsCommand}" />
+                                    </FlexLayout.GestureRecognizers>
+                                    <Label Text="{Binding ItemName}" StyleClass="header"/>
+                                    <Label Text="{Binding ItemTime}"/>
+                                    <Image Source="ic_expand_more" WidthRequest="48" HeightRequest="48" />
+                                </FlexLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            <views:LoadingView HorizontalOptions="Fill" VerticalOptions="Fill"/>
+        </Grid>
+    </ContentPage>
+</TabbedPage>

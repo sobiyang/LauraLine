@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:classes="clr-namespace:LauraLine.Classes"
+             x:Class="LauraLine.Views.LineItemView">
+    <ContentView.Content>
+        <Frame Padding="5">
+            <StackLayout>
+                <Label Text="{Binding ItemName}" StyleClass="header" HorizontalTextAlignment="Center"/>
+                <Grid>
+                    <Label Text="记录日期"/>
+                    <DatePicker Date="{Binding LineItem.LogDate}"
+                        MaximumDate="{x:Static sys:DateTime.Today}"
+                        Margin="80,0,0,0"/>
+                </Grid>
+                <Grid>
+                    <Label Text="记录时间"/>
+                    <TimePicker Time="{Binding LineItem.LogTime}"
+                        Margin="80,0,0,0"/>
+                </Grid>
+                <Grid IsVisible="{Binding LineItem.IsBreastLine}">
+                    <Label Text="左右奶"/>
+                    <Picker ItemsSource="{x:Static classes:Constants.LeftRightOptions}"
+                    SelectedIndex="{Binding LineItem.LeftRight}"
+                        Margin="80,0,0,0"/>
+                </Grid>
+                <Grid IsVisible="{Binding LineItem.IsBreastLine}">
+                    <Label Text="持续时间"/>
+                    <StackLayout Orientation="Horizontal"
+                        Margin="80,0,0,0">
+                        <Label Text="{Binding LineItem.Duration}" StyleClass="value-text "/>
+                        <Label Text="分钟" />
+                        <Stepper Minimum="1" Maximum="60" Value="{Binding LineItem.Duration}"/>
+                    </StackLayout>
+                </Grid>
+                <Grid IsVisible="{Binding LineItem.IsBottleLine}">
+                    <Label Text="喂食量"/>
+                    <StackLayout Orientation="Horizontal"
+                        Margin="80,0,0,0">
+                        <Label Text="{Binding LineItem.Amount}" StyleClass="value-text "/>
+                        <Label Text="毫升" />
+                        <Stepper Minimum="1" Maximum="200" Increment="5"
+                                     Value="{Binding LineItem.Amount}"/>
+                    </StackLayout>
+                </Grid>
+                <Grid IsVisible="{Binding LineItem.IsDiaperLine}">
+                    <Label Text="大便"/>
+                    <Switch Margin="80,0,0,0" IsToggled="{Binding LineItem.HasPoop}" />
+                </Grid>
+                <Grid IsVisible="{Binding LineItem.IsDiaperLine}">
+                    <Label Text="小便"/>
+                    <StackLayout Orientation="Horizontal"
+                        Margin="80,0,0,0">
+                        <Label Text="{Binding LineItem.PeeTimes}" StyleClass="value-text "/>
+                        <Label Text="次" />
+                        <Stepper Minimum="1" Maximum="5" Value="{Binding LineItem.PeeTimes}"/>
+                    </StackLayout>
+                </Grid>
+                <!--
+                <Button Text="保存" Margin="80,0,0,0" Command="{Binding SaveCommand}"/>
+                -->
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

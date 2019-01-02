@@ -1,0 +1,33 @@
+﻿^contentpage {
+    background-color: white;
+}
+
+.title {
+    font-size: 24;
+}
+.header {
+    font-size: 22;
+}
+
+.value-text {
+    font-size: 20;
+    color: black;
+}
+^button {
+    position: relative;
+    display: block;
+    margin: 5;
+    text-align: center;
+    overflow: hidden;
+    border-width: 0;
+    outline: none;
+    border-radius: 2;
+    box-shadow: 0 1 4 rgba(0, 0, 0, .6);
+    background-color: skyblue;
+}
+
+.btn-image {
+    width: 32;
+    height: 32;
+    background-color: transparent;
+}

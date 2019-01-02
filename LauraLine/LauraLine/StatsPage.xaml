@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LauraLine.StatsPage"
+             xmlns:viewmodels="clr-namespace:LauraLine.ViewModels"
+             xmlns:views="clr-namespace:LauraLine.Views"
+             BindingContext="{x:Static viewmodels:ViewModelLocator.statsPageVM}"
+             Title="统计">
+    <ContentPage.Content>
+        <Grid Padding="2">
+            <ListView ItemsSource="{Binding Stats}" HasUnevenRows="True"
+                      SeparatorVisibility="None" SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Padding="2" Margin="10" BackgroundColor="AliceBlue">
+                                <StackLayout>
+                                    <Label StyleClass="header" Text="{Binding Date}"/>
+                                    <FlexLayout JustifyContent="SpaceBetween">
+                                        <Label Text="总母乳时间"/>
+                                        <Label Text="{Binding SumBreastDuration, StringFormat='{0:N0} 分钟'}" StyleClass="value-text"/>
+                                    </FlexLayout>
+                                    <FlexLayout JustifyContent="SpaceBetween">
+                                        <Label Text="平均母乳时间"/>
+                                        <Label Text="{Binding AvgBreastDuration, StringFormat='{0:F1} 分钟'}" StyleClass="value-text"/>
+                                    </FlexLayout>
+                                    <FlexLayout JustifyContent="SpaceBetween">
+                                        <Label Text="总配方奶量"/>
+                                        <Label Text="{Binding SumBottleAmount, StringFormat='{0:N0} 毫升'}" StyleClass="value-text"/>
+                                    </FlexLayout>
+                                    <FlexLayout JustifyContent="SpaceBetween">
+                                        <Label Text="大便次数"/>
+                                        <Label Text="{Binding PoopTimes, StringFormat='{0:N0} 次'}" StyleClass="value-text"/>
+                                    </FlexLayout>
+                                    <FlexLayout JustifyContent="SpaceBetween">
+                                        <Label Text="小便次数"/>
+                                        <Label Text="{Binding PeeTimes, StringFormat='{0:N0} 次'}" StyleClass="value-text"/>
+                                    </FlexLayout>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <views:LoadingView HorizontalOptions="Fill" VerticalOptions="Fill"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

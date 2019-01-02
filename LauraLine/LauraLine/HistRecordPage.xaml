@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LauraLine.HistRecordPage"
+             xmlns:viewmodels="clr-namespace:LauraLine.ViewModels"
+             xmlns:views="clr-namespace:LauraLine.Views"             
+             BindingContext="{x:Static viewmodels:ViewModelLocator.mainPageVM}"
+             Title="历史">
+    <ContentPage.Content>
+        <Grid Padding="2">
+            <Grid IsVisible="{Binding ShowContent}">
+                <ListView ItemsSource="{Binding AllLineItems}" HasUnevenRows="True"
+                      SeparatorVisibility="None" SelectionMode="None" Margin="0,0,0,60">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <FlexLayout JustifyContent="SpaceBetween" Margin="2"
+                                        BackgroundColor="{Binding BackgroundColor}">
+                                    <FlexLayout.GestureRecognizers>
+                                        <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                          Command="{Binding ViewDetailsCommand}" />
+                                    </FlexLayout.GestureRecognizers>
+                                    <StackLayout Orientation="Vertical" Padding="5">
+                                        <Label Text="{Binding ItemName}" StyleClass="header"/>
+                                        <Label Text="{Binding ItemTime}"/>
+                                    </StackLayout>
+                                    <Image Source="ic_chevron_right_black_48dp" WidthRequest="48" HeightRequest="48" />
+                                </FlexLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            <views:LoadingView HorizontalOptions="Fill" VerticalOptions="Fill"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
